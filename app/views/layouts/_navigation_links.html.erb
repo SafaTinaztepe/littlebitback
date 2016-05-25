@@ -1,0 +1,16 @@
+<%# add navigation links to this file %>
+
+<li><%= link_to image_tag("logo.gif"), root_url%></li>
+<li><%= link_to 'Home', root_url%></li>
+<% if user_signed_in? %>
+  <li><%= link_to 'Sign out', signout_path %></li>
+<% else %>
+  <li><%= link_to 'Sign in', login_path %></li>
+<% end %>
+
+  <!-- I feel like this link is unnecessary. <li>##<%= link_to 'Campaigns', index_campaign_path %></li> -->
+
+<!--just showing off here... sorry-->
+<% for static in Dir.entries(Rails.root.join("app", "views","pages")).map { |file_name| file_name.split(".")[0] }.compact %>
+	<li><%= link_to static.capitalize, page_path(static.downcase) %></li>
+<% end %>

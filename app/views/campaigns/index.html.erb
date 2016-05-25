@@ -1,0 +1,34 @@
+<div class="container" id="textblock">
+<h1> Campaigns </h1>
+<table>
+	<tbody>
+		<% @campaigns.each do |c| %>
+			<tr class = 'row border_bottom'>
+				<td class = "thumbnail">
+					<%= image_tag "cover_images/#{c.id}.png"%>
+				</td>
+				<td class = "details">
+                    <%= link_to c.title, show_campaign_path(c.title)%><br>
+					Posted by: <%= User.find(c.ownership).name %> - <%= c.comments.count %> comments -
+                  <% if c.website.present? %>
+                      <%= link_to 'Source Link', c.website, :target => '_blank' %> - <% end %><a type="button" data-toggle="modal" data-target="#myModal<%= c.qr_code %>">View QR</a>
+                  <div id="myModal<%= c.qr_code %>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-body">
+                          <img src="http://chart.googleapis.com/chart?cht=qr&chs=500x500&chl=<%= c.qr_code %>" class="img-responsive">
+                        </div>
+                      </div>
+                    </div>
+                  </div><br>
+				</td>
+				<!--
+				<td class = "goal_zone">
+					<%= if c.preferred_currency == "Bitcoin" then pref_currency_inital = "\u0E3F" else pref_currency_inital = "\u00d0;" end%>
+					<%= if c.goal.to_i == 0 then "Open Donations" else "Goal: " + c.goal + pref_currency_inital.encode("utf-8") end %>
+				</td>
+				-->
+			</tr>
+		<% end %>
+	</tbody>
+</table>

@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  objective: MyString
+  type: 
+  description: MyText
+  ownership: MyString
+  category: MyString
+  comments: MyString
+  verification_link: MyString
+  preferred_currency: MyString
+  location: MyString
+  website: MyString
+  rating: 1.5
+  tags: MyText
+  votes: 1
+  views: 1
+
+two:
+  title: MyString
+  objective: MyString
+  type: 
+  description: MyText
+  ownership: MyString
+  category: MyString
+  comments: MyString
+  verification_link: MyString
+  preferred_currency: MyString
+  location: MyString
+  website: MyString
+  rating: 1.5
+  tags: MyText
+  votes: 1
+  views: 1

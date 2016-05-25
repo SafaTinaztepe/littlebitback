@@ -1,0 +1,95 @@
+<div class="container" id="projectbody">
+  <div class="jumbotron" id="campaignjumbo">
+    <div><h1><%=@campaign.title%></h1></div>
+    <i>views: <%= @campaign.views %></i>
+  </div>
+  <div>
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#user" data-toggle="tab">Overview</a></li>
+      <li><a href="#feedback" data-toggle="tab">Details</a></li>
+      <div id="exchangeinfo" align="right">Current Exchange: 1 BTC = $<%= @current_bitcoin_price %>USD</div>
+    </ul>
+  </div>
+  <div class="tab-content">
+    <div class="tab-pane active" id="user">
+      <div class="col-lg-9 col-md-9">
+        <div id="coverimage">
+          <p><%= @campaign.description  %></p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3" id="sidebar">
+        <img src="http://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=<%= @campaign.qr_code %>">
+        <h2><%= number_with_delimiter(@current_balance) %></h2><h5>bits currently held</h5>
+        <h3><%= @tx_count %></h3><h5>transactions</h5>
+        <h3><%= number_with_delimiter(@total_btc) %></h3><h5>bits received</h5>
+        <h3><% if @campaign.website.blank? %>
+              <a class="btn btn-danger disabled">No Source Link</a>
+          <% else %>
+              <a href="http://<%= @campaign.website %>" class="btn btn-success" target="_blank">View Source</a>
+          <% end %></h3>
+        <a class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">View QR Code</a>
+        <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <img src="http://chart.googleapis.com/chart?cht=qr&chs=500x500&chl=<%= @campaign.qr_code %>" class="img-responsive">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- @end #user -->
+    <div class="tab-pane" id="feedback">
+      <div>
+        <br>
+        <table class = 'table-striped table-bordered table-condensed table-responsive' style = "table-layout:auto;">
+          <thead><th>Donation Info </th><th>Donation Info</th></thead>
+
+          <tr><td class = "auto">Submitted:</td><td> <%= @campaign.created_at %></td></tr>
+          <tr><td>Page views:</td><td> <%= @campaign.views%></td></tr>
+          <tr><td>Address:</td><td><%=@campaign.qr_code%></td></tr>
+          <tr><td>Tags:</td><td><%=@campaign.tags%></td></tr>
+          <tr><td>Source:</td><td><%=@campaign.website%></td></tr>
+        </table>
+      </div>
+    </div><!-- @end #feedback -->
+  </div><!-- @end .tab-content -->
+
+  <div class="container" id="projectdetails">
+    <div class="tab-content col-md-10">
+    </div>
+  </div><!-- tab content -->
+  <div id="donationdetails">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#stream" data-toggle="tab">Discussion</a></li>
+      <li><a href="#comments" data-toggle="tab">Donation Stream</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane" id="comments">
+        <h3>Recent Deposits to: <i><%=@campaign.title%></i></h3>
+      </div><!-- @end #stream -->
+      <div class="tab-pane active" id="stream">
+        <% if @campaign.user == current_user -%>
+            <div class="btn-group pull-right">
+              <%= link_to 'Destroy', @campaign, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %>
+            </div>
+        <% end %>
+
+        <h3 class="comments_title">
+          <%= @campaign.comments.count %> Comments
+        </h3>
+
+        <div id="comments">
+          <%= render :partial => @campaign.comments %>
+        </div>
+        <%= simple_form_for [@campaign, Comment.new]  do |f| %>
+            <div class="field">
+              <%= f.text_area :body, class: "form-control" %>
+            </div>
+            <br>
+            <%= f.submit "Add Comment", class: "btn btn-primary" %>
+        <% end %>
+      </div><!-- @end #comments -->
+      <br>
+    </div><!-- @end .tab-content -->

@@ -1,0 +1,64 @@
+<style>
+	#pref-coin{
+		font-weight: bold;
+	}
+	#required{
+		color:red;
+	}
+</style>
+
+<div class = "container" style = "width: 600px; margin-left: 25px; margin-bottom: 50px; float: left;" id = "newproject">
+<%= form_for @campaign do |f| %>
+	<div class = 'col-md-offset-1' style ='margin-top:5px; align:left;'>
+         <div class = "row top-buffer">
+           <h1>Add a New Address</h1>
+           <br><span id ="pref-coin">Public Address: </span><span id = "required">*</span><br/><%= f.text_field :qr_code, :required => true%>
+
+         </div>
+		<div class = "row top-buffer">
+            Address Name: <span id = "required">*</span><br/> <%= f.text_field :title, :required => true %><br>
+		</div>
+        <div class = 'row top-buffer'>
+          <div class="wrapper">
+            Key Source:
+            <div class="tooltip">Where could someone verify the owner or source of this public address?</div>
+          </div>
+            <%= f.text_field :website %>
+          </div>
+		<div class ="row top-buffer">
+			Category: <%= f.select :category, ["Uncategorized", "People", "Events", "Non-profit Organizations", "Websites and Blogs", "Software", "Businesses", "Media and Content Creation", "Authors", "Singers", "Other"]%>
+		</div>
+          <div class = 'row top-buffer'>
+            Description: <span id = "required">*</span><br/> <%= f.text_area :description, :required => true, :placeholder => "Tell us about why this account is interesting.", :rows=>'6', :cols=> "55", :style => "" %><br>
+          </div>
+      <div class = 'row' style = "float: right; padding-top: 10px;">
+        <%= f.submit "Add Address", :class => "btn btn-lg btn-primary", :style => 'margin-bottom: 50px; margin-right: 50px;' %>
+        </div>
+      <div class = 'row' style = "padding-top: 10px;" >
+        Optional Cover Image <%= f.file_field :cover_image, :text => "Upload Cover Image", :class => "btn btn-sm btn-alert"%>
+      </div>
+          <!-- javascript here to generate a default suggestion description using title, category, preferred currency-->
+          <script>
+			//select B and D and L or whatever from unicode
+			document.getElementById("campaign_preferred_currency").onchange = function(){
+				document.getElementById("pref-coin-initial").innerHTML = this.options[this.selectedIndex].text[0];	
+				document.getElementById("pref-coin").innerHTML = this.options[this.selectedIndex].text;
+			}
+			function changeElement() {
+				var elementCheckMark = document.getElementById("campaign_open_donations")
+				var outputField = document.getElementById("campaign_goal")
+				if (elementCheckMark.checked === true){
+					
+					outputField.disabled = true
+					outputField.value = "Open Donations"
+				}	
+				else{
+					outputField.disabled = false
+					outputField.value = ""
+				}
+			}
+
+		</script>
+<% end %>
+
+</div>
