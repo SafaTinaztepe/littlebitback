@@ -11,6 +11,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @posts = Campaign.joins(@User).where(:ownership => @user.id )
   end
-
 end

@@ -9,7 +9,7 @@
 				</td>
 				<td class = "details">
                     <%= link_to c.title, show_campaign_path(c.title)%><br>
-					Posted by: <%= User.find(c.ownership).name %> - <%= c.comments.count %> comments -
+                  Posted by: <%= User.find(c.ownership).name %> - <%= c.comments.count %> comments -
                   <% if c.website.present? %>
                       <%= link_to 'Source Link', c.website, :target => '_blank' %> - <% end %><a type="button" data-toggle="modal" data-target="#myModal<%= c.qr_code %>">View QR</a>
                   <div id="myModal<%= c.qr_code %>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

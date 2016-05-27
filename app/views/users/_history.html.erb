@@ -1,0 +1,17 @@
+<% @posts.each do |h| %>
+    <h4><%= h.title %></h4>
+<p><%= truncate(h.description, :length => 500) %>
+    <h6>
+      <% if h.website.present? %>
+          <%= link_to 'Source Link', h.website, :target => '_blank' %> - <% end %><a type="button" data-toggle="modal" data-target="#myModal<%= h.qr_code %>">View QR</a>
+      <div id="myModal<%= h.qr_code %>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+              <img src="http://chart.googleapis.com/chart?cht=qr&chs=500x500&chl=<%= h.qr_code %>" class="img-responsive">
+            </div>
+          </div>
+        </div>
+      </div> -
+      <%= h.comments.count %> comments
+<% end %>
