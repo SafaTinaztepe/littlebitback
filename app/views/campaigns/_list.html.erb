@@ -19,13 +19,13 @@
 
 <table>
 	<tbody>
-		<% @campaigns[0..4].sort_by(&locals[:organize].to_sym).each do |c| %>
+		<% @campaigns[0..9].sort_by(&locals[:organize].to_sym).each do |c| %>
 			<tr class = 'row border_bottom'>
 				<td class = "thumbnail" id="listthumb">
 					<%= image_tag "cover_images/#{c.id}.png"%>
 				</td>
 				<td class = "details">
-					<%= link_to c.title, show_campaign_path(c.title)%><br>
+					<%= link_to c.title, show_campaign_path(c.id)%><br>
 					Posted by: <%= link_to User.find(c.ownership).name, user_path(c.ownership) %> - <%= c.comments.count %> comments -
                       <% if c.website.present? %>
                         <%= link_to 'Source Link', c.website, :target => '_blank' %> - <% end %> <a type="button" data-toggle="modal" data-target="#myModal<%= c.qr_code %>">View QR</a>

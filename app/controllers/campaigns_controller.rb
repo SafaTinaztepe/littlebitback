@@ -25,7 +25,7 @@ class CampaignsController < ApplicationController
 	end
 
 	def show
-		@campaign = Campaign.find_by_title(params[:title])
+		@campaign = Campaign.find(params[:id])
 		@campaign.views += 1
 		@current_bitcoin_price = JSON.parse(open('https://api.coindesk.com/v1/bpi/currentprice.json').read)['bpi']['USD']['rate'].to_f.round(2)
 		@total_deposit = JSON.parse(open("https://blockchain.info/address/#{@campaign.qr_code}?format=json").read)['total_received']

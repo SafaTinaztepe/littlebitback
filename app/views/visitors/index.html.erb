@@ -86,7 +86,7 @@
     <div class="tab-pane active" id="home"><%= render "campaigns/list", :locals => {:organize => "created_at"}%></div>
     <div class="tab-pane" id="updated"><%= render "campaigns/list", :locals => {:organize => "updated_at"} %></div>
     <div class="tab-pane" id="popular"><%= render "campaigns/list", :locals => {:organize => "views"} %></div>
-    <div class="tab-pane" id="new"><%= render "campaigns/list", :locals => {:organize => "created_at"} %></div>
+    <div class="tab-pane" id="new"><%= render "campaigns/list", :locals => {:organize => "title"} %></div>
 </div>
   </div>
 <!--

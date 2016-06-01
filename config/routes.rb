@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-    resources :comments
     root to: 'visitors#index'
 
 
@@ -23,8 +22,9 @@ Rails.application.routes.draw do
     get '/c/index' => 'campaigns#index', as: :index_campaign
     get '/c/create' => 'campaigns#campaign_creation', as: :create_campaign
     post '/c/create' => 'campaigns#show'
-    get '/c/:title' => 'campaigns#show', as: :show_campaign
+    get '/c/:id' => 'campaigns#show', as: :show_campaign
     resources :campaigns do
       resources :comments
     end
+    resources :comments
   end

@@ -1,5 +1,5 @@
 <% @posts.each do |h| %>
-    <h4><%= h.title %></h4>
+    <h4><%= link_to h.title, show_campaign_path(h.title)%></h4>
 <p><%= truncate(h.description, :length => 500) %>
     <h6>
       <% if h.website.present? %>
