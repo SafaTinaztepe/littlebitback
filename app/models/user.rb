@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_many :campaigns
-  has_many :comments
+  has_many :comments, as: :commentable
 
   def self.create_with_omniauth(auth)
     create! do |user|

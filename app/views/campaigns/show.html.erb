@@ -70,26 +70,19 @@
         <h3>Recent Deposits to: <i><%=@campaign.title%></i></h3>
       </div><!-- @end #stream -->
       <div class="tab-pane active" id="stream">
-        <% if @campaign.user == current_user -%>
-            <div class="btn-group pull-right">
-              <%= link_to 'Destroy', @campaign, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %>
-            </div>
-        <% end %>
 
         <h3 class="comments_title">
-          <%= @campaign.comments.count %> Comments
+          Comments
         </h3>
-
-        <div id="comments">
-          <%= render :partial => @campaign.comments %>
-        </div>
-        <%= simple_form_for [@campaign, Comment.new]  do |f| %>
-            <div class="field">
-              <%= f.text_area :body, class: "form-control" %>
-            </div>
+        <%= form_for [@campaign, Comment.new] do |f| %>
+            <%= f.text_area :body, placeholder: "Add a comment", class: "form-control", rows: "3" %>
             <br>
-            <%= f.submit "Add Comment", class: "btn btn-primary" %>
+            <%= f.submit "Add Comment", class: "btn btn-sm btn-default" %>
         <% end %>
-      </div><!-- @end #comments -->
-      <br>
+        <hr>
+        <ul>
+          <%= render(partial: 'comments/comment', collection: @campaign.comments) %>
+        </ul>
+        <div id="comments">
+        </div><!-- @end #comments -->
     </div><!-- @end .tab-content -->

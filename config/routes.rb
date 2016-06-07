@@ -26,5 +26,7 @@ Rails.application.routes.draw do
     resources :campaigns do
       resources :comments
     end
-    resources :comments
+    resources :comments do
+      resources :comments
+    end
   end

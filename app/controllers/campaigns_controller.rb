@@ -21,7 +21,7 @@ class CampaignsController < ApplicationController
 		#this is stupid notation, should be changed, but for some reason adding the strings kept adding an unnecessary "/" and broke the thing
 		##File.rename(upload_path.join(image_name), upload_path + "#{Campaign.find_by_title(params[:campaign][:title]).id.to_s}#{File.extname(image_name)}")
 
-		redirect_to "/c/#{@campaign.title}"
+		redirect_to "/c/#{@campaign.id}"
 	end
 
 	def show
@@ -33,6 +33,7 @@ class CampaignsController < ApplicationController
 		@tx_count = JSON.parse(open("https://blockchain.info/address/#{@campaign.qr_code}?format=json").read)['n_tx']
 		@total_btc = @total_deposit / 100.to_f.round(10)
 		@current_balance = @account_value / 100.to_f.round(10)
+
 		# potentially could make it unique to each session
 		@campaign.save
 	end

@@ -1,3 +1,4 @@
+
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -29,7 +30,7 @@ class ApplicationController < ActionController::Base
 =end
     def authenticate_user!
       unless current_user
-        redirect_to root_url, :alert => 'You need to log in, in order to post a campaign.'
+        redirect_to :back, :alert => 'You need to log in first.'
       end
     end
 
