@@ -8,6 +8,11 @@ class ApplicationController < ActionController::Base
   helper_method :user_signed_in?
   #helper_method :correct_user?
 
+  def show
+    @campaign = Campaign.find(params[:id])
+    @total_deposit = JSON.parse(open("https://blockchain.info/address/#{@campaign.qr_code}?format=json").read)['total_received']
+  end
+
   private
     def current_user
       begin
@@ -33,5 +38,4 @@ class ApplicationController < ActionController::Base
         redirect_to :back, :alert => 'You need to log in first.'
       end
     end
-
 end

@@ -22,27 +22,30 @@
 		<% @campaigns[0..9].sort_by(&locals[:organize].to_sym).each do |c| %>
 			<tr class = 'row border_bottom'>
 				<td class = "thumbnail" id="listthumb">
-					<%= image_tag "cover_images/#{c.id}.png"%>
 				</td>
 				<td class = "details">
 					<%= link_to c.title, show_campaign_path(c.id)%><br>
 					Posted by: <%= link_to User.find(c.ownership).name, user_path(c.ownership) %> - <%= c.comments.count %> comments -
                       <% if c.website.present? %>
-                        <%= link_to 'Source Link', c.website, :target => '_blank' %> - <% end %> <a type="button" data-toggle="modal" data-target="#myModal<%= c.qr_code %>">View QR</a>
-                  <div id="myModal<%= c.qr_code %>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-body">
-                          <img src="http://chart.googleapis.com/chart?cht=qr&chs=500x500&chl=<%= c.qr_code %>" class="img-responsive">
-                        </div>
+                        <%= link_to 'Source Link', c.website, :target => '_blank' %> - 
+                      <% end %> 
+                    <a type="button" data-toggle="modal" data-target="#myModal<%= c.qr_code %>">View QR</a>
+                    	<div id="myModal<%= c.qr_code %>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        	<div class="modal-dialog">
+                        		<div class="modal-content">
+                            		<div class="modal-body">
+                            			<div class="modal-info">
+                            				<center><h1><%= c.title %></h1>
+                            				<%= c.qr_code %></center>
+                            			</div>
+                              			<img src="http://chart.googleapis.com/chart?cht=qr&chs=500x500&chl=<%= c.qr_code %>" class="img-responsive">
+                            		</div>
+                          		</div>
+                    		</div>
                       </div>
-                    </div>
-                  </div>
 				</td>
 				<td class = "goal_zone">
-				<!-- can just store the unicode as a string in the database then decode it later -->
-					<% pref_currency_initial = c.preferred_currency == "Bitcoin" ? "\u0E3F" : "\u00d0" %>
-					<%= c.goal.to_i == 0 ? "Open Donations!" : "Goal: " + pref_currency_initial.encode("utf-8") + c.goal%>
+					<%= c.qr_code %>
 				</td>
 			</tr>
 		<% end %>
