@@ -27,8 +27,10 @@
 					<%= link_to c.title, show_campaign_path(c.id)%><br>
 					Posted by: <%= link_to User.find(c.ownership).name, user_path(c.ownership) %> - <%= c.comments.count %> comments -
                       <% if c.website.present? %>
-                        <%= link_to 'Source Link', c.website, :target => '_blank' %> - 
-                      <% end %> 
+                        <%= link_to 'Source Link', c.website, :target => '_blank' %> -
+                      <% else %> 
+                      	<%= 'No Source Provided -' %>
+                      <% end %>
                     <a type="button" data-toggle="modal" data-target="#myModal<%= c.qr_code %>">View QR</a>
                     	<div id="myModal<%= c.qr_code %>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         	<div class="modal-dialog">
