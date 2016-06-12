@@ -3,16 +3,19 @@
 <%= comment.body %>
 <div class="accordion">
   <div class="panel">
-    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Reply</a>
+    <small><a data-toggle="collapse" data-parent="#accordion" href="#collapse">Reply</a>
+      <% if current_user == comment.user %>
+        - <%= link_to "Delete", [@commentable, comment], method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
   </div>
-  <div id="collapseOne" class="panel-collapse collapse">
+  <div id="collapse" class="panel-collapse collapse">
   <%= form_for [comment, Comment.new] do |f| %>
       <div class="field">
           <%= f.text_area :body, placeholder: "Add a Reply", class: "form-control" %>
           <%= f.submit "Save", class: "btn btn-sm btn-default" %>
       </div>
   <% end %>
-  </div>
+  </div></small>
 </div>
 <ul>
     <%= render partial: 'comments/comment', collection: comment.comments %>
