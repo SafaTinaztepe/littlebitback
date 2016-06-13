@@ -26,7 +26,20 @@ Rails.application.routes.draw do
     resources :campaigns do
       resources :comments
     end
+
     resources :comments do
       resources :comments
+      member do
+        put "like", to: "comments#upvote"
+        put "dislike", to: "comments#downvote"
+      end
     end
+
+    resources :links do 
+      member do
+        put "like", to: "links#upvote"
+        put "dislike", to: "links#downvote"
+      end
+    end
+    
   end

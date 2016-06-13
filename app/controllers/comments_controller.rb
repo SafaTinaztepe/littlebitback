@@ -24,6 +24,19 @@ class CommentsController < ApplicationController
       redirect_to :back, notice: "Comment deleted."
     end
   end
+
+  def upvote 
+    @comment = Comment.find(params[:id])
+    @comment.upvote_by current_user
+    redirect_to :back
+  end  
+
+  def downvote
+    @comment = Comment.find(params[:id])
+    @comment.downvote_by current_user
+    redirect_to :back
+  end
+
   private
 
   def comment_params

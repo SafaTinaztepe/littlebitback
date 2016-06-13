@@ -3,7 +3,15 @@
 <%= comment.body %>
 <div class="accordion">
   <div class="panel">
-    <small><a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= comment_counter %>">Reply</a>
+    <small>
+      <%= link_to like_comment_path(comment), method: :put do %>
+        &#x25B2
+      <%= comment.get_upvotes.size %>
+      <%= link_to dislike_comment_path(comment), method: :put do %>
+        &#x25BC
+      <%= comment.get_downvotes.size %> -
+    <% end %>
+    <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= comment_counter %>">Reply</a>
       <% if current_user == comment.user %>
         - <%= link_to "Delete", [@commentable, comment], method: :delete, data: { confirm: 'Are you sure?' } %>
       <% end %>
@@ -19,4 +27,5 @@
 </div>
 <ul>
     <%= render partial: 'comments/comment', collection: comment.comments %>
+    <% end %>
 </ul>
