@@ -26,6 +26,6 @@
   </div></small>
 </div>
 <ul>
-    <%= render partial: 'comments/comment', collection: comment.comments %>
+    <%= render partial: 'comments/comment', collection: comment.comments.order(:cached_votes_score => :desc) %>
     <% end %>
 </ul>

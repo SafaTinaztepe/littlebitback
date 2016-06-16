@@ -1,7 +1,8 @@
 <div class="container" id="projectbody">
   <div class="jumbotron" id="campaignjumbo">
     <div><h1><%=@campaign.title%></h1></div>
-    <i>views: <%= @campaign.views %></i>
+    <i>views: <%= @campaign.views %></i><br>
+    <h3><b><%= @campaign.qr_code %></b></h3>
   </div>
   <div>
     <ul class="nav nav-tabs">
@@ -81,7 +82,7 @@
         <% end %>
         <hr>
         <ul>
-          <%= render(partial: 'comments/comment', collection: @campaign.comments) %>
+          <%= render(partial: 'comments/comment', collection: @campaign.comments.order(:cached_votes_score => :desc)) %>
         </ul>
         <div id="comments">
         </div><!-- @end #comments -->

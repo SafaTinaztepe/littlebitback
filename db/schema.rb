@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160613003657) do
+ActiveRecord::Schema.define(version: 20160616052959) do
 
   create_table "campaigns", force: :cascade do |t|
     t.string   "title"
@@ -38,12 +38,26 @@ ActiveRecord::Schema.define(version: 20160613003657) do
     t.text     "body"
     t.integer  "commentable_id"
     t.string   "commentable_type"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.integer  "campaign_id"
     t.integer  "user_id"
+    t.integer  "cached_votes_total",      default: 0
+    t.integer  "cached_votes_score",      default: 0
+    t.integer  "cached_votes_up",         default: 0
+    t.integer  "cached_votes_down",       default: 0
+    t.integer  "cached_weighted_score",   default: 0
+    t.integer  "cached_weighted_total",   default: 0
+    t.float    "cached_weighted_average", default: 0.0
   end
 
+  add_index "comments", ["cached_votes_down"], name: "index_comments_on_cached_votes_down"
+  add_index "comments", ["cached_votes_score"], name: "index_comments_on_cached_votes_score"
+  add_index "comments", ["cached_votes_total"], name: "index_comments_on_cached_votes_total"
+  add_index "comments", ["cached_votes_up"], name: "index_comments_on_cached_votes_up"
+  add_index "comments", ["cached_weighted_average"], name: "index_comments_on_cached_weighted_average"
+  add_index "comments", ["cached_weighted_score"], name: "index_comments_on_cached_weighted_score"
+  add_index "comments", ["cached_weighted_total"], name: "index_comments_on_cached_weighted_total"
   add_index "comments", ["campaign_id"], name: "index_comments_on_campaign_id"
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
