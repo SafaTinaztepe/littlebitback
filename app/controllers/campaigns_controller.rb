@@ -33,7 +33,7 @@ class CampaignsController < ApplicationController
 		@tx_count = JSON.parse(open("https://blockchain.info/address/#{@campaign.qr_code}?format=json").read)['n_tx']
 		@total_btc = @total_deposit / 100.to_f.round(10)
 		@current_balance = @account_value / 100.to_f.round(10)
-
+		@transaction = JSON.parse(open("https://blockchain.info/address/#{@campaign.qr_code}?format=json&limit=25").read)['txs']
 		# potentially could make it unique to each session
 		@campaign.save
 	end

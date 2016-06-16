@@ -68,7 +68,27 @@
 
     <div class="tab-content">
       <div class="tab-pane" id="comments">
-        <h3>Recent Deposits to: <i><%=@campaign.title%></i></h3>
+        <h3>Recent Transfers To: <i><%=@campaign.title%></i></h3>
+        <table class="table" >
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Comment</th>
+            <th>Amount</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @transaction.each do |t| %>
+            <tr>
+              <td><%= Time.at(t['time']).strftime("%b %e, %Y @ %l:%M%P") %></td>
+              <td><%= t['out'][0]['addr_tag'] %></td>
+              <td><%= t['out'][0]['value'] %></td>
+              <td><%= link_to 'More Details' , 'https://blockchain.info/tx/' + t['hash'], :target => '_blank' %></td>
+            </tr>
+            <% end %>
+        </tbody>
+      </table>
       </div><!-- @end #stream -->
       <div class="tab-pane active" id="stream">
 
@@ -84,6 +104,5 @@
         <ul>
           <%= render(partial: 'comments/comment', collection: @campaign.comments.order(:cached_votes_score => :desc)) %>
         </ul>
-        <div id="comments">
-        </div><!-- @end #comments -->
-    </div><!-- @end .tab-content -->
+<!-- @end #comments -->
+</div><!-- @end .tab-content -->

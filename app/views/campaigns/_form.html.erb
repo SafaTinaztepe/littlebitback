@@ -25,18 +25,18 @@
           </div>
             <%= f.text_field :website %>
           </div>
-		<div class ="row top-buffer">
+<!-- 		<div class ="row top-buffer">
 			Category: <%= f.select :category, ["Uncategorized", "People", "Events", "Non-profit Organizations", "Websites and Blogs", "Software", "Businesses", "Media and Content Creation", "Authors", "Singers", "Other"]%>
-		</div>
+		</div> -->
           <div class = 'row top-buffer'>
             Description: <span id = "required">*</span><br/> <%= f.text_area :description, :required => true, :placeholder => "Tell us about why this account is interesting.", :rows=>'6', :cols=> "55", :style => "" %><br>
           </div>
       <div class = 'row' style = "float: right; padding-top: 10px;">
         <%= f.submit "Add Address", :class => "btn btn-lg btn-primary", :style => 'margin-bottom: 50px; margin-right: 50px;' %>
         </div>
-      <div class = 'row' style = "padding-top: 10px;" >
+<!--       <div class = 'row' style = "padding-top: 10px;" >
         Optional Cover Image <%= f.file_field :cover_image, :text => "Upload Cover Image", :class => "btn btn-sm btn-alert"%>
-      </div>
+      </div> -->
           <!-- javascript here to generate a default suggestion description using title, category, preferred currency-->
           <script>
 			//select B and D and L or whatever from unicode

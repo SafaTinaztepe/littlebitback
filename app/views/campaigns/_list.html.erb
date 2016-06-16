@@ -24,7 +24,7 @@
 				<td class = "thumbnail" id="listthumb">
 				</td>
 				<td class = "details">
-					<%= link_to c.title, show_campaign_path(c.id)%><br>
+					<font size=4><%= link_to c.title, show_campaign_path(c.id)%></font><small><br>
 					Posted by: <%= link_to User.find(c.ownership).name, user_path(c.ownership) %> - <%= c.comments.size %> comments -
                       <% if c.website.present? %>
                         <%= link_to 'Source Link', c.website, :target => '_blank' %> -
@@ -45,7 +45,7 @@
                           		</div>
                     		</div>
                       </div>
-				</td>
+				</small></td>
 				<td class = "goal_zone">
 					<%= c.qr_code %>
 				</td>
