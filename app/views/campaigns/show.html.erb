@@ -80,10 +80,15 @@
         </thead>
         <tbody>
         <% @transaction.each do |t| %>
-            <tr>
+          <% @tx_change = open('https://blockchain.info/es/q/txresult/'+ t['hash'] + '/'+ @campaign.qr_code + '?api_code=4def58da-fcc3-44d9-abe1-a3e311a76a4f').read %>
+            <% if @tx_change.to_i > 0 %>
+              <tr style="background-color:#e6ffe6">
+            <% else %>
+              <tr style="background-color:#ffcccc">
+            <% end %>
               <td><%= Time.at(t['time']).strftime("%b %e, %Y @ %l:%M%P") %></td>
               <td><%= t['out'][0]['addr_tag'] %></td>
-              <td><%= t['out'][0]['value'] %></td>
+              <td><%= @tx_change.to_i / 100.to_f.round(10) %> bits</td>
               <td><%= link_to 'More Details' , 'https://blockchain.info/tx/' + t['hash'], :target => '_blank' %></td>
             </tr>
             <% end %>
