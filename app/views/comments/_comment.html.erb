@@ -11,12 +11,12 @@
         &#x25BC
       <%= comment.get_downvotes.size %> -
     <% end %>
-    <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= comment_counter %>">Reply</a>
+    <a data-toggle="collapse" data-parent="#accordion" href="#<%= comment.id %>">Reply</a>
       <% if current_user == comment.user %>
         - <%= link_to "Delete", [@commentable, comment], method: :delete, data: { confirm: 'Are you sure?' } %>
       <% end %>
   </div>
-  <div id="collapse<%= comment_counter %>" class="panel-collapse collapse">
+  <div id="<%= comment.id %>" class="panel-collapse collapse">
   <%= form_for [comment, Comment.new] do |f| %>
       <div class="field">
           <%= f.text_area :body, placeholder: "Add a Reply", class: "form-control" %>
