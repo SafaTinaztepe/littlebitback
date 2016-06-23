@@ -47,7 +47,7 @@
                       </div>
 				</small></td>
 				<td class = "goal_zone">
-					$<%= c.qr_code %> 
+					<%= open('https://blockchain.info/q/addressbalance/'+ c.qr_code).read %>
 				</td>
 			</tr>
 		<% end %>
