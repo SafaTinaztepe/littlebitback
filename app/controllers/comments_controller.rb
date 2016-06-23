@@ -1,4 +1,4 @@
-class CommentsController < ApplicationController
+  class CommentsController < ApplicationController
   before_action :authenticate_user!, :only => [:create]
   before_action :find_commentable
 
@@ -15,6 +15,21 @@ class CommentsController < ApplicationController
     else
       redirect_to :back, notice: "Your comment wasn't posted!"
     end
+  end
+
+  def edit
+    @comment = Comment.find(params[:id])
+  end
+
+  def update
+    @comment = Comment.find(params[:id])
+
+    if @comment.update_attributes(comment_params)
+      redirect_to :back, notice: "Comment edited."
+    else
+      render :action => 'edit'
+    end
+      
   end
 
   def destroy
