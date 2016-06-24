@@ -6,11 +6,10 @@
     <small>
       <%= link_to like_comment_path(comment), method: :put do %>
         &#x25B2
-      <%= comment.get_upvotes.size %>
+      <%= comment.cached_weighted_score %>
       <%= link_to dislike_comment_path(comment), method: :put do %>
         &#x25BC
-      <%= comment.get_downvotes.size %> -
-    <% end %>
+    <% end %> -
     <a data-toggle="collapse" data-parent="#accordion" href="#<%= comment.id %>">Reply</a>
       <% if current_user == comment.user %> - <%= link_to "Edit", edit_comment_path(comment) %>
         - <%= link_to "Delete", [@commentable, comment], method: :delete, data: { confirm: 'Are you sure?' } %>

@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
 
   def show
     @campaign = Campaign.find(params[:id])
-    @total_deposit = JSON.parse(open("https://blockchain.info/address/#{@campaign.qr_code}?format=json").read)['total_received']
   end
 
   private

@@ -24,12 +24,15 @@
   def update
     @comment = Comment.find(params[:id])
 
+    respond_to do |format|
     if @comment.update_attributes(comment_params)
-      redirect_to :back, notice: "Comment edited."
+      format.html { redirect_to(:back, :action => 'show' , :notice => 'Comment was successfully updated.') }
+      format.json { respond_with_bip(comment_params) }
     else
-      render :action => 'edit'
+      format.html { render :action => "edit" }
+      format.json { respond_with_bip(@comment) }
     end
-      
+  end 
   end
 
   def destroy
