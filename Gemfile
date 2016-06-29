@@ -21,6 +21,8 @@ gem 'better_errors'
 gem 'unirest'
 gem 'simple_form', '~> 3.2', '>= 3.2.1'
 gem 'acts_as_votable', '~> 0.10.0'
+gem 'redcarpet'
+gem 'coderay'
 
 group :development do
   gem 'web-console', '~> 2.0'

@@ -15,7 +15,7 @@
     <div class="tab-pane active" id="user">
       <div class="col-lg-9 col-md-9">
         <div id="coverimage">
-          <p><%= @campaign.description  %></p>
+          <p><%= markdown(@campaign.description)  %></p>
         </div>
       </div>
       <div class="col-lg-3 col-md-3" id="sidebar">
