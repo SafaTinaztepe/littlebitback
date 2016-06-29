@@ -1,0 +1,12 @@
+<div class="container" id="textblock" >
+<h1>Edit Address</h1>
+<%= form_for(@campaign) do |f| %>
+  <div class="field">
+    <%= f.text_area :description %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+<%= link_to 'Back', @campaign %>
+</div>

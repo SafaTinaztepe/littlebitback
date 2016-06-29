@@ -32,7 +32,7 @@
       format.html { render :action => "edit" }
       format.json { respond_with_bip(@comment) }
     end
-  end 
+    end 
   end
 
   def destroy

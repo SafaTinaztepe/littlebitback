@@ -1,6 +1,6 @@
 <% @posts.each do |h| %>
     <h4><%= link_to h.title, show_campaign_path(h.id)%></h4>
-<p><%= truncate(h.description, :length => 500) %>
+<p><%= markdown(truncate(h.description, :length => 500)) %>
     <h6>
       <% if h.website.present? %>
           <%= link_to 'Source Link', h.website, :target => '_blank' %> - <% end %><a type="button" data-toggle="modal" data-target="#myModal<%= h.qr_code %>">View QR</a>
@@ -14,4 +14,5 @@
         </div>
       </div> -
       <%= h.comments.count %> comments
+      <hr>
 <% end %>

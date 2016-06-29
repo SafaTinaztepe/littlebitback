@@ -24,6 +24,24 @@ class CampaignsController < ApplicationController
 		redirect_to "/c/#{@campaign.id}"
 	end
 
+	def edit
+		@campaign = Campaign.find(params[:id])
+	end
+
+	def update
+		@campaign = Campaign.find(params[:id])
+
+    	respond_to do |format|
+    	if @campaign.update_attributes(campaign_params)
+      		format.html { redirect_to(:back, :action => 'show' , :notice => 'Address was successfully updated.') }
+      		format.json { respond_with_bip(campaign_params) }
+    	else
+      		format.html { render :action => "edit" }
+      		format.json { respond_with_bip(@campaign) }
+    	end
+    	end
+	end
+
 	def show
 		@campaign = Campaign.find(params[:id])
 		@campaign.views += 1
