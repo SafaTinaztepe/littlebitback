@@ -32,13 +32,8 @@ class CampaignsController < ApplicationController
 		@campaign = Campaign.find(params[:id])
 
     	respond_to do |format|
-    	if @campaign.update_attributes(campaign_params)
-      		format.html { redirect_to(:back, :action => 'show' , :notice => 'Address was successfully updated.') }
-      		format.json { respond_with_bip(campaign_params) }
-    	else
-      		format.html { render :action => "edit" }
-      		format.json { respond_with_bip(@campaign) }
-    	end
+      		format.html { redirect_to(@campaign, :action => 'show' , :notice => 'Address was successfully updated.') }
+      		format.js
     	end
 	end
 
