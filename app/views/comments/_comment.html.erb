@@ -1,6 +1,6 @@
 <small><b><%= link_to comment.user.name, comment.user %></b> <i>said <%= time_ago_in_words(comment.created_at) %> ago:</i></small>
 <br>
-<%= comment.body %>
+<%= markdown(comment.body) %>
 <div class="accordion">
   <div class="panel">
     <small>
