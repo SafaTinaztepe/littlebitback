@@ -32,9 +32,11 @@ class CampaignsController < ApplicationController
 		@campaign = Campaign.find(params[:id])
 
     	respond_to do |format|
+    		if @campaign.update(campaign_params)
       		format.html { redirect_to(@campaign, :action => 'show' , :notice => 'Address was successfully updated.') }
       		format.js
     	end
+    end
 	end
 
 	def show
