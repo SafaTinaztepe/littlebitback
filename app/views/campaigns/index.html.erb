@@ -5,10 +5,10 @@
 		<% @campaigns.each do |c| %>
 			<tr class = 'row border_bottom'>
 				<td class = "thumbnail">
-					<%= image_tag "cover_images/#{c.id}.png"%>
+					
 				</td>
 				<td class = "details">
-                    <%= link_to c.title, show_campaign_path(c.title)%><br>
+                    <%= link_to c.title, show_campaign_path(c.id)%><br>
                   Posted by: <%= User.find(c.ownership).name %> - <%= c.comments.count %> comments -
                   <% if c.website.present? %>
                       <%= link_to 'Source Link', c.website, :target => '_blank' %> - <% end %><a type="button" data-toggle="modal" data-target="#myModal<%= c.qr_code %>">View QR</a>

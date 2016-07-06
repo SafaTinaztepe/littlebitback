@@ -23,6 +23,7 @@ gem 'simple_form', '~> 3.2', '>= 3.2.1'
 gem 'acts_as_votable', '~> 0.10.0'
 gem 'redcarpet'
 gem 'coderay'
+gem 'phantomjs', '~> 2.1', '>= 2.1.1.0'
 
 group :development do
   gem 'web-console', '~> 2.0'

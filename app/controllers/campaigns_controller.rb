@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'phantomjs'
 
 class CampaignsController < ApplicationController
 	before_action :authenticate_user!, :only => [:campaign_creation, :create]
@@ -12,6 +13,8 @@ class CampaignsController < ApplicationController
 		@campaign.ownership = current_user.id
 		@campaign.save
 
+		Phantomjs.run('./public/javascripts/test.js')
+		
 		# dealing with cover image
 		##upload_path = Rails.root.join("app","assets","images","cover_images")
 		##image_name =  params[:campaign][:cover_image].original_filename
@@ -52,6 +55,7 @@ class CampaignsController < ApplicationController
 		parent_comments = Comment.where(:commentable_id => @campaign.id)
     	child_comments = Comment.where(:commentable_id => parent_comments.map(&:id))
     	@all_comments = parent_comments + child_comments
+
     	# potentially could make it unique to each session
 		@campaign.save
 	end
