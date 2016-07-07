@@ -1,5 +1,4 @@
 require 'open-uri'
-require 'phantomjs'
 
 class CampaignsController < ApplicationController
 	before_action :authenticate_user!, :only => [:campaign_creation, :create]
@@ -13,7 +12,8 @@ class CampaignsController < ApplicationController
 		@campaign.ownership = current_user.id
 		@campaign.save
 
-		Phantomjs.run('./public/javascripts/test.js')
+		ws = Webshot::Screenshot.instance
+		ws.capture "http://"+@campaign.website, "public/sourceimages/source_#{@campaign.id}.png", width: 800, height: 600, quality: 85
 		
 		# dealing with cover image
 		##upload_path = Rails.root.join("app","assets","images","cover_images")

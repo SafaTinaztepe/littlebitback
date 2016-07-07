@@ -24,6 +24,7 @@ gem 'acts_as_votable', '~> 0.10.0'
 gem 'redcarpet'
 gem 'coderay'
 gem 'phantomjs', '~> 2.1', '>= 2.1.1.0'
+gem 'webshot'
 
 group :development do
   gem 'web-console', '~> 2.0'
