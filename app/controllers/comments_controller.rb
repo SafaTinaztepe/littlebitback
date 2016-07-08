@@ -26,7 +26,7 @@
 
     respond_to do |format|
     if @comment.update_attributes(comment_params)
-      format.html { redirect_to(comment_params[:campaign_id, :action => 'show' , :notice => 'Comment was successfully updated.') }
+      format.html { redirect_to(comment_params[:campaign_id, :action => 'show' , :notice => 'Comment was successfully updated.']) }
       format.json { respond_with_bip(comment_params) }
     else
       format.html { render :action => "edit" }
