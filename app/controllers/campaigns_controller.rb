@@ -13,7 +13,7 @@ class CampaignsController < ApplicationController
 		@campaign.save
 
 		ws = Webshot::Screenshot.instance
-		ws.capture "http://"+@campaign.website, "public/sourceimages/source_#{@campaign.id}.png", width: 800, height: 600, quality: 85
+		ws.capture @campaign.website, "app/assets/images/sourceimages/source_#{@campaign.id}.png", width: 800, height: 600, quality: 85
 		
 		# dealing with cover image
 		##upload_path = Rails.root.join("app","assets","images","cover_images")
@@ -71,4 +71,5 @@ class CampaignsController < ApplicationController
 			#tags to come when dynamically searching for keywords
 			params.require(:campaign).permit(:title,:type,:preferred_currency, :category,:qr_code, :goal, :description, :website)
     	end
+    
 end

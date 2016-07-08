@@ -15,6 +15,10 @@
     <div class="tab-pane active" id="user">
       <div class="col-lg-9 col-md-9">
         <div id="coverimage">
+        <% if File.exists?("app/assets/images/sourceimages/source_#{@campaign.id}.png") %>
+          <%= image_tag("sourceimages/source_#{@campaign.id}.png") %>
+          <% else %>
+        <% end %>
           <div id="description"
           <p><%= markdown(@campaign.description) %><small><%= link_to "Edit", edit_campaign_path, remote: true, id: "edit_desc" %></small></p>
           </div>

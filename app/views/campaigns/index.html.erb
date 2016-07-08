@@ -4,9 +4,11 @@
 	<tbody>
 		<% @campaigns.each do |c| %>
 			<tr class = 'row border_bottom'>
-				<td class = "thumbnail">
-					
-				</td>
+				<% if File.exists?("app/assets/images/sourceimages/source_#{c.id}.png") %>
+					<td class = "thumbnail" id="listthumb">
+          				<%= image_tag("sourceimages/source_#{c.id}.png") %> </td>
+          		<% else %>			
+        		<% end %>	
 				<td class = "details">
                     <%= link_to c.title, show_campaign_path(c.id)%><br>
                   Posted by: <%= User.find(c.ownership).name %> - <%= c.comments.count %> comments -
